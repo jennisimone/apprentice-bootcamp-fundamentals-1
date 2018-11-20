@@ -1,28 +1,37 @@
 package cards;
 
+
+
 import java.util.Scanner;
+
 
 class Snap {
     private int player1Score;
     private int player2Score;
-    private AnimalDeck deck;
+    private SuperDeck superDeck;
 
-    Snap(AnimalDeck deck) {
-        this.deck = deck;
-        deck.shuffle();
+
+
+
+    Snap(SuperDeck superDeck) {
+        this.superDeck = superDeck;
+        superDeck.shuffle();
     }
 
     public static void main(String[] args) {
-        Snap snap = new Snap(new AnimalDeck());
+        AnimalDeck animalDeck = new AnimalDeck();
+        PokerDeck pokerDeck = new PokerDeck();
+
+        Snap snap = new Snap(new SuperDeck(pokerDeck,animalDeck));
         snap.play();
     }
 
     void play() {
         Scanner scanner = new Scanner(System.in);
 
-        AnimalCard previousCard = null;
-        while (deck.getCards().length > 0) {
-            AnimalCard currentCard = deck.deal();
+        Card previousCard = null;
+        while (superDeck.getCards().size() > 0) {
+            Card currentCard = superDeck.deal();
             System.out.println(currentCard);
             String input = scanner.nextLine();
             if (input.length() > 0 && input.charAt(0) == 'a') {
