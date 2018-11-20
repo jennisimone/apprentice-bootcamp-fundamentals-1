@@ -6,6 +6,7 @@ public class Receipt {
     private int aCountdown = 3;
     private int total;
     private int bCountdown = 2;
+    private int cCountdown = 4;
 
     String text() {
         return text + "Total: " + total;
@@ -37,7 +38,14 @@ public class Receipt {
 
     void scannedC() {
         text += "C: 20\n";
-        total += 20;
+        if(--cCountdown == 0){
+            text += " - 10 (4 for 70)";
+            total += 10;
+        }
+        else {
+            total += 20;
+        }
+        text += "\n";
     }
 
     void scannedD() {

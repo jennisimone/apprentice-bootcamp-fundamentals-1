@@ -1,16 +1,15 @@
 package cards;
 
-public class Encapsulation {
-    public static void main(String[] args) {
-        Encapsulation encapsulation = new Encapsulation();
-        String[] deckInOrder = encapsulation.getCards();
-        for(String card: deckInOrder){
-            System.out.println(card);
-        }
-    }
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-    String[] getCards() {
-        String[] result = new String[52];
+class PokerDeck implements Deck {
+
+    private List<Card> cards;
+
+    public PokerDeck() {
+        cards = new ArrayList<>();
         int[][] deck = new int[52][2];
 
         for (int suit = 0; suit < 4; suit++) {
@@ -19,7 +18,6 @@ public class Encapsulation {
             }
         }
 
-        int cardNumber = 0;
         for (int[] card : deck) {
             String faceValueName;
             switch (card[1]){
@@ -48,10 +46,27 @@ public class Encapsulation {
                 default: throw new IllegalArgumentException("Something went wrong " + card[0] + "is not a valid suitName!");
             }
 
-            result[cardNumber] = faceValueName + " of " + suitName;
-            cardNumber++;
+            cards.add(new PokerCard(faceValueName, suitName));
         }
+    }
 
-        return result;
+    public List<Card> getPokerCards(){
+        return this.cards;
+    }
+
+    @Override
+    public void shuffle() {
+        Collections.shuffle(cards);
+    }
+
+
+    @Override
+    public List<Card> getCards() {
+        return this.cards;
+    }
+
+    @Override
+    public Card deal() {
+        return cards.remove(0);
     }
 }

@@ -65,14 +65,37 @@ public class CheckoutTests {
     }
 
     @Test
-    public void fourB() {
+    public void fourA() {
         Checkout checkout = new Checkout();
 
-        checkout.scan("B");
-        checkout.scan("B");
-        checkout.scan("B");
-        checkout.scan("B");
-        assertThat(checkout.total()).isEqualTo(90);
+        checkout.scan("A");
+        checkout.scan("A");
+        checkout.scan("A");
+        checkout.scan("A");
+        assertThat(checkout.total()).isEqualTo(180);
+    }
+
+    @Test
+    public void fourC() {
+        Checkout checkout = new Checkout();
+
+        checkout.scan("C");
+        checkout.scan("C");
+        checkout.scan("C");
+        checkout.scan("C");
+        assertThat(checkout.total()).isEqualTo(70);
+    }
+
+    @Test
+    public void fiveD() {
+        Checkout checkout = new Checkout();
+
+        checkout.scan("D");
+        checkout.scan("D");
+        checkout.scan("D");
+        checkout.scan("D");
+        checkout.scan("D");
+        assertThat(checkout.total()).isEqualTo(60);
     }
 
     @Test
